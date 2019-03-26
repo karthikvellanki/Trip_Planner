@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container-fluid">
+	<p>
+	  <h4>Title:</h4>
+	  <%= @trip.title %>
+	</p>
+
+	<p>
+	  <h4>Summary:</h4>
+	  <%= @trip.summary %>
+	</p>
+
+	<%= link_to 'Add Day', new_trip_day_path(@trip), class: 'btn btn-primary' %>
+
+	<div class="container-fluid">
+		<div class="media-body">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @days.each do |day| %>
+						<tr>
+							<td><%= day.title %></td>
+							<td><%= day.description %></td>
+							<td><%= link_to "Edit", edit_trip_day_path(trip_id: @trip.id, id: day.id), class: 'btn btn-mini' %></td>
+							<td><%= link_to "Delete", [@trip, day], method: :delete, class: 'btn btn-mini btn-danger', confirm: "Are you sure you want to delete this day?" %></td>
+						</tr>
+	                <% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<%= link_to 'Edit Trip', edit_trip_path(@trip), class: 'btn btn-outline-info' %> 
+	<%= link_to 'View Trips', trips_path, class: 'btn btn-outline-light' %>
+</div>
+
+
